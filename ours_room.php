@@ -1,5 +1,5 @@
 
-
+ <?php include_once('heder.php'); ?>
 
 
 <?php
@@ -14,35 +14,32 @@ $nid=$_POST['nid'];
 $phone=$_POST['phone'];
 $checkin=$_POST['checkin'];
 $checkout=$_POST['checkout'];
+$checkin = strtotime($checkin);
+$checkin= date('d-m-Y',$checkin); 
+$checkout = strtotime($checkout);
+$checkout= date('d-m-Y',$checkout); 
 $adult=$_POST['member'];
-
-foreach( $_POST['room'] as $room){
-
-
-      $query=mysqli_query($conn,"SELECT * FROM `room_confirm` WHERE `roomname`= $room AND `checkin`= $checkin  AND `checkout`=  $checkout");
-            if(mysqli_num_rows($query)==0){
-        $sql = mysqli_query($conn,"INSERT INTO `room_confirm`(`name`, `email`, `nid`, `phone`, `checkin`, `checkout`, `member`, `roomname`) VALUES ('$name','$email','$nid','$phone','$checkin','$checkout','$adult','$adult','$room')");
-if($sql){
-
-  echo ' suceeess';
-}
-else
-{
-  echo "alredy room entry";
-}
+$roomname =$_POST['room'];
+if($checkin<$checkout){
+$sql = mysqli_query($conn,"INSERT INTO `room_confirm`(`name`, `email`, `nid`, `phone`, `checkin`, `checkout`, `member`, `roomname`) VALUES ('$name','$email','$nid','$phone','$checkin','$checkout','$adult','$roomname')");
+             }  
+             else{
+               echo "plese check in and check out currrect time";
+             }
 
 
-
-
+            
   
+
+
+
+
 }
 
 
 
-}
-}
 ?>
- <?php include_once('heder.php'); ?>
+
 
 <body>
    <marquee behavior="scroll" direction="left"><b>Very nice and pleasant environment
@@ -65,7 +62,7 @@ The Restaurant is open 24 hours a day</b> </marquee>
 
 <class="list-group">
   <li class="list-group-item">
-    <input class="form-check-input me-1" type="checkbox" value="A1" aria-label="..." name="room[]">
+    <input class="form-check-input me-1" type="checkbox" value="A1" aria-label="..." name="room">
     <div class="card" style="width:auto;">
   <img class="card-img-top " src="bedroom/room (2).jpg" alt="Card image" width="40%" height="50%">
   <div class="card-body">
@@ -85,7 +82,7 @@ The Restaurant is open 24 hours a day</b> </marquee>
 </div>
   </li>
   <li class="list-group-item">
-    <input class="form-check-input me-1" type="checkbox" value="A2" name="room[]" aria-label="...">
+    <input class="form-check-input me-1" type="checkbox" value="A2" name="room" aria-label="...">
     <div class="card" style="width:auto;">
   <img class="card-img-top " src="bedroom/room (6).jpg" alt="Card image" width="40%" height="50%">
   <div class="card-body">
@@ -95,7 +92,7 @@ The Restaurant is open 24 hours a day</b> </marquee>
 
     
 <div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" name="room[]"  data-bs-toggle="dropdown" aria-expanded="false">
+  <button class="btn btn-primary dropdown-toggle" type="button" value="A4" name="room"  data-bs-toggle="dropdown" aria-expanded="false">
 more details
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -108,7 +105,7 @@ more details
 </div>
   </li>
   <li class="list-group-item">
-    <input class="form-check-input me-1" type="checkbox" value="A3" aria-label="..." name="room[]">
+    <input class="form-check-input me-1" type="checkbox" value="A3" aria-label="..." name="room">
     <div class="card" style="width:auto;">
   <img class="card-img-top " src="bedroom/room (4).jpg" alt="Card image" width="40%" height="50%">
   <div class="card-body">
@@ -125,7 +122,7 @@ more details
 </div>
     
    <div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" name="room[]"  data-bs-toggle="dropdown" aria-expanded="false">
+  <button class="btn btn-primary dropdown-toggle" type="button" name="room"  data-bs-toggle="dropdown" aria-expanded="false">
 more details
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -138,7 +135,7 @@ more details
 </div>
   </li>
   <li class="list-group-item">
-    <input class="form-check-input me-1" type="checkbox" value="B1" name="room[]" aria-label="...">
+    <input class="form-check-input me-1" type="checkbox" value="B1" name="room" aria-label="...">
     <div class="card" style="width:auto;">
   <img class="card-img-top " src="bedroom/room (6).jpg" alt="Card image" width="40%" height="50%">
   <div class="card-body">
@@ -184,7 +181,7 @@ more details
 
 <div class="mb-3">
     <label  class="form-label">user name</label>
-    <input type="text" class="form-control" id="user" aria-describedby="" Name="name">
+    <input type="text" class="form-control"  aria-describedby="" Name="name">
     <div id="" class="form-text">We'll never share your user name with anyone else.</div>
   </div>
 <div class="mb-3">
