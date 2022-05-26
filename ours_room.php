@@ -1,5 +1,5 @@
 
- <?php include_once('heder.php'); ?>
+
 
 
 <?php
@@ -14,39 +14,77 @@ $nid=$_POST['nid'];
 $phone=$_POST['phone'];
 $checkin=$_POST['checkin'];
 $checkout=$_POST['checkout'];
-$checkin = strtotime($checkin);
-$checkin= date('d-m-Y',$checkin); 
-$checkout = strtotime($checkout);
-$checkout= date('d-m-Y',$checkout); 
 $adult=$_POST['member'];
-$roomname =$_POST['room'];
-if($checkin<$checkout){
-$sql = mysqli_query($conn,"INSERT INTO `room_confirm`(`name`, `email`, `nid`, `phone`, `checkin`, `checkout`, `member`, `roomname`) VALUES ('$name','$email','$nid','$phone','$checkin','$checkout','$adult','$roomname')");
-             }  
-             else{
-               echo "plese check in and check out currrect time";
-             }
+
+ $room =$_POST['room'];
 
 
-            
+      $query=mysqli_query($conn,"SELECT * FROM `room_confirm` WHERE   ");
+            if(mysqli_num_rows($query)==0){
+        $sql = mysqli_query($conn,"INSERT INTO `room_confirm`(`name`, `email`, `nid`, `phone`, `checkin`, `checkout`, `member`, `roomname`) VALUES ('$name','$email','$nid','$phone','$checkin','$checkout','$adult','$adult','$room')");
+if($sql){
+
+  echo ' suceeess';
+}
+else
+{
+  echo "alredy room entry";
+}
+
+
+
+
   
-
+}
 
 
 
 }
 
+?>
+<?php
+
+ require_once 'config.php';
+ 
+$user = $_SESSION['id'];
 
 
 ?>
 
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>home page</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
 <body>
+
+
    <marquee behavior="scroll" direction="left"><b>Very nice and pleasant environment
 The Restaurant is open 24 hours a day</b> </marquee>
-<div class="container-fluid">
+<div class="container">
+  <div class="row">
 
-	<?php include_once('search_bar.php'); ?>
+  <div class="col-lg-6">
+  <?php
+	$username = mysqli_query($conn,"SELECT * FROM `user_registation` WHERE `id` = '$user'");
+	
+	$userdata = mysqli_fetch_assoc($username);
+	echo $userdata['user_email'];
+	
+	
+	?>
+  </div>
+
+  <div class="col-lg-6">
+  <?php include_once('search_bar.php'); ?>
+  </div>
+  </div>
   
 </div>
 <br>
@@ -62,7 +100,7 @@ The Restaurant is open 24 hours a day</b> </marquee>
 
 <class="list-group">
   <li class="list-group-item">
-    <input class="form-check-input me-1" type="checkbox" value="A1" aria-label="..." name="room">
+    <input class="form-check-input me-1" type="checkbox" value="1200" aria-label="..." name="room">
     <div class="card" style="width:auto;">
   <img class="card-img-top " src="bedroom/room (2).jpg" alt="Card image" width="40%" height="50%">
   <div class="card-body">
@@ -82,7 +120,7 @@ The Restaurant is open 24 hours a day</b> </marquee>
 </div>
   </li>
   <li class="list-group-item">
-    <input class="form-check-input me-1" type="checkbox" value="A2" name="room" aria-label="...">
+    <input class="form-check-input me-1" type="checkbox" value="1200" name="room" aria-label="...">
     <div class="card" style="width:auto;">
   <img class="card-img-top " src="bedroom/room (6).jpg" alt="Card image" width="40%" height="50%">
   <div class="card-body">
@@ -92,7 +130,7 @@ The Restaurant is open 24 hours a day</b> </marquee>
 
     
 <div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" value="A4" name="room"  data-bs-toggle="dropdown" aria-expanded="false">
+  <button class="btn btn-primary dropdown-toggle" type="button" value="1500" name="room"  data-bs-toggle="dropdown" aria-expanded="false">
 more details
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -105,13 +143,13 @@ more details
 </div>
   </li>
   <li class="list-group-item">
-    <input class="form-check-input me-1" type="checkbox" value="A3" aria-label="..." name="room">
+    <input class="form-check-input me-1" type="checkbox" value="1500" aria-label="..." name="room">
     <div class="card" style="width:auto;">
   <img class="card-img-top " src="bedroom/room (4).jpg" alt="Card image" width="40%" height="50%">
   <div class="card-body">
     <h4 class="card-title">double  room_3</h4>
     <div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" name="room[]"  data-bs-toggle="dropdown" value= "B3" aria-expanded="false">
+  <button class="btn btn-primary dropdown-toggle" type="button" name="room"  data-bs-toggle="dropdown" value= "1600" aria-expanded="false">
   more details
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -122,7 +160,7 @@ more details
 </div>
     
    <div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" name="room"  data-bs-toggle="dropdown" aria-expanded="false">
+  <button class="btn btn-primary dropdown-toggle" type="button" name="room" value= "2000"  data-bs-toggle="dropdown" aria-expanded="false">
 more details
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -135,7 +173,7 @@ more details
 </div>
   </li>
   <li class="list-group-item">
-    <input class="form-check-input me-1" type="checkbox" value="B1" name="room" aria-label="...">
+    <input class="form-check-input me-1" type="checkbox" value="1600" name="room" aria-label="...">
     <div class="card" style="width:auto;">
   <img class="card-img-top " src="bedroom/room (6).jpg" alt="Card image" width="40%" height="50%">
   <div class="card-body">
@@ -154,7 +192,7 @@ more details
 </div>
   </li>
   <li class="list-group-item">
-    <input class="form-check-input me-1" type="checkbox" value="B2" name="room" aria-label="...">
+    <input class="form-check-input me-1" type="checkbox" value="1200" name="room" aria-label="...">
     <div class="card" style="width:auto;">
   <img class="card-img-top " src="bedroom/room (6).jpg" alt="Card image" width="40%" height="50%">
   <div class="card-body">
@@ -241,5 +279,5 @@ more details
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </body>
 </html>
-
+    
  

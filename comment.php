@@ -1,70 +1,4 @@
-<?php 
-	require_once 'config.php';
-if(isset($_POST['cmt'])){
-	
-$name=$_POST['c_name'];
-$email=$_POST['c_email'];
-$comment=$_POST['comment'];
-
-
-$result = mysqli_query($conn,"INSERT INTO `user_comment`(`user_cmt_name`, `User_cmt_email`, `user_cmt`) VALUES ('$name','$email','$comment')");
-
-}
-if($result){
-			echo 'successfully';
-		}else{
-			echo 'unsuccessful';
-		}
-
-?> 
-
-
-
-<?php
-
-require_once 'config.php';
-if(isset($_POST['Register'])){
-	
-$name=$_POST['name'];
-$email=$_POST['email'];
-$password=$_POST['password'];
-if(!$name==""){
-	if(!$email=="")
-	{
-	if(!$password=="")
-	{
-	if(strlen($password)>6)	
-	{
-		$query=mysqli_query($conn,"SELECT * FROM `user_registation` WHERE `user_email`='$email' ");
-if(mysqli_num_rows($query)==0){
-		$result=mysqli_query($conn,"INSERT INTO `user_registation`( `User_name`, `user_email`, `User_password`) VALUES ('$name','$email','$password')");
-		if($result){
-		
-		}else{
-			
-			
-		}
-	}else{
-		
-	}
-	}
-else{
-	
-}	
-	}
-	else{
-		
-	}
-}else{
-	
-}
-
-
-	
-}
-}
-
-?>
+<?php include_once('clintfunction.php'); ?>
 
 
 <?php include_once('heder.php'); ?>
@@ -77,7 +11,7 @@ else{
 	<div class="nav-pills ">
     <ul class="nav navbar-nav   ">
       <li class="nav-item "><a  class="nav-link"href="#">Home</a></li>
-      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" data-toggle="popover" title="Popover Header" data-content="Some content inside the popover" href="#">booking now <span class="caret"></span></a>
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" data-toggle="popover" title="Popover Header" data-content="Some content inside the popover" href="ours_room.php">booking now <span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li><a class="nav-link" href=""><span  style="color:red;"class="glyphicon glyphicon-log-in">  </span></a></li>
           

@@ -1,3 +1,4 @@
+<?php include_once('clintfunction.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

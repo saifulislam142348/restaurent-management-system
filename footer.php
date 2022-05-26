@@ -1,4 +1,5 @@
-<footer id="footer" class="footer layout-03">
+
+<footer  class="footer layout-03">
         <div class="footer-content background-footer-03">
             <div class="container">
                 <div class="row">
@@ -99,3 +100,4 @@
             </div>
         </div>
     </footer>
+    
