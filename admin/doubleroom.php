@@ -27,7 +27,7 @@
     </thead>
     <tbody>
 	<?php
-	$result=mysqli_query($conn,"SELECT * FROM `room_confirm` where roomname ='B1' or roomname ='B2' or roomname ='B3' ");
+	$result=mysqli_query($conn,"SELECT * FROM `room_confirm` where roomname between 1300 and 2000 ");
 	while($row=mysqli_fetch_assoc($result)){
   
 
@@ -46,10 +46,10 @@
         <td><?php echo $row['member']; ?></td>
         <td><?php echo $row['roomname']; ?></td>
        
-        <td><?php echo $row['time']; ?></td>
+        <td><?php echo date('d-M-Y',strtotime($row['time'])) ; ?></td>
 		<td>
 		<a class=" btn btn-success" href="">Edit</a> 
-     <a class="btn btn-success" href="delete.php?=id<?php echo  $row['id']; ?>">Delete</a>
+     <a class="btn btn-danger" href="delete.php?=id<?php echo  $row['id']; ?>">Delete</a>
 		</td>
 		
       </tr>

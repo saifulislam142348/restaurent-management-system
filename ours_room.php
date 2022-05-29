@@ -1,6 +1,6 @@
 
 
-
+<?php require_once 'config.php';?>
 
 <?php
 
@@ -8,7 +8,7 @@ require_once 'config.php';
 
 if(isset($_POST['submit'])){
 	
-$name=$_POST['name'];
+$name=$_POST['username'];
 $email=$_POST['email'];
 $nid=$_POST['nid'];
 $phone=$_POST['phone'];
@@ -18,31 +18,36 @@ $adult=$_POST['member'];
 
  $room =$_POST['room'];
 
+ echo $name;
+ foreach($room as $price){
+if($checkin<$checkout){
 
-      $query=mysqli_query($conn,"SELECT * FROM `room_confirm` WHERE   ");
-            if(mysqli_num_rows($query)==0){
-        $sql = mysqli_query($conn,"INSERT INTO `room_confirm`(`name`, `email`, `nid`, `phone`, `checkin`, `checkout`, `member`, `roomname`) VALUES ('$name','$email','$nid','$phone','$checkin','$checkout','$adult','$adult','$room')");
-if($sql){
+  $query=mysqli_query($conn,"SELECT * FROM `room_cofirm` WHERE `email`='$email'");
+  if(mysqli_num_rows($query)==0){
+    
 
-  echo ' suceeess';
+        $sql = mysqli_query($conn,"INSERT INTO `room_confirm`(`name`, `email`, `nid`, `phone`, `checkin`, `checkout`, `member`, `roomname`) VALUES ('$name','$email','$nid','$phone','$checkin','$checkout','$adult',' $price')");
+       if($sql){
+        
+header('location:profile.php');
+
+  }
+     
+ 
+else{
+  echo ' Please check the check in and checkout';
 }
-else
-{
-  echo "alredy room entry";
+ 
+ 
 }
 
-
-
-
-  
+  }
 }
-
-
-
-}
+ }
 
 ?>
 <?php
+
 
  require_once 'config.php';
  
@@ -100,12 +105,12 @@ The Restaurant is open 24 hours a day</b> </marquee>
 
 <class="list-group">
   <li class="list-group-item">
-    <input class="form-check-input me-1" type="checkbox" value="1200" aria-label="..." name="room">
+    <input class="form-check-input me-1" type="checkbox" value="1200" aria-label="..." name="room[]">
     <div class="card" style="width:auto;">
   <img class="card-img-top " src="bedroom/room (2).jpg" alt="Card image" width="40%" height="50%">
   <div class="card-body">
     <h4 class="card-title">double  room_1</h4>
- 
+    <p>price:1200</p>
     <div class="dropdown">
   <button class="btn btn-primary dropdown-toggle" type="button"  data-bs-toggle="dropdown" aria-expanded="false">
     more details
@@ -120,17 +125,17 @@ The Restaurant is open 24 hours a day</b> </marquee>
 </div>
   </li>
   <li class="list-group-item">
-    <input class="form-check-input me-1" type="checkbox" value="1200" name="room" aria-label="...">
+    <input class="form-check-input me-1" type="checkbox" value="1200" name="room[]" aria-label="...">
     <div class="card" style="width:auto;">
   <img class="card-img-top " src="bedroom/room (6).jpg" alt="Card image" width="40%" height="50%">
   <div class="card-body">
     <h4 class="card-title">double  room_2</h4>
-  
+    <p>price:1200</p>
  
 
     
 <div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" value="1500" name="room"  data-bs-toggle="dropdown" aria-expanded="false">
+  <button class="btn btn-primary dropdown-toggle" type="button" value="1500" name="room[]"  data-bs-toggle="dropdown" aria-expanded="false">
 more details
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -143,11 +148,12 @@ more details
 </div>
   </li>
   <li class="list-group-item">
-    <input class="form-check-input me-1" type="checkbox" value="1500" aria-label="..." name="room">
+    <input class="form-check-input me-1" type="checkbox" value="1500"  name="room[]">
     <div class="card" style="width:auto;">
   <img class="card-img-top " src="bedroom/room (4).jpg" alt="Card image" width="40%" height="50%">
   <div class="card-body">
     <h4 class="card-title">double  room_3</h4>
+    <p>price:1500</p>
     <div class="dropdown">
   <button class="btn btn-primary dropdown-toggle" type="button" name="room"  data-bs-toggle="dropdown" value= "1600" aria-expanded="false">
   more details
@@ -173,11 +179,12 @@ more details
 </div>
   </li>
   <li class="list-group-item">
-    <input class="form-check-input me-1" type="checkbox" value="1600" name="room" aria-label="...">
+    <input class="form-check-input me-1" type="checkbox" value="1600" name="room[]" aria-label="...">
     <div class="card" style="width:auto;">
   <img class="card-img-top " src="bedroom/room (6).jpg" alt="Card image" width="40%" height="50%">
   <div class="card-body">
     <h4 class="card-title">double  room_2</h4>
+    <p>price:1600</p>
     <div class="dropdown">
   <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
    more details
@@ -192,13 +199,14 @@ more details
 </div>
   </li>
   <li class="list-group-item">
-    <input class="form-check-input me-1" type="checkbox" value="1200" name="room" aria-label="...">
+    <input class="form-check-input me-1" type="checkbox" value="1200" name="room[]" aria-label="...">
     <div class="card" style="width:auto;">
   <img class="card-img-top " src="bedroom/room (6).jpg" alt="Card image" width="40%" height="50%">
   <div class="card-body">
     <h4 class="card-title">double  room_2</h4>
+    <p>price:1200</p>
     <div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+  <button class="btn btn-primary dropdown-toggle" type="button"  data-bs-toggle="dropdown" aria-expanded="false">
     more datails
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -219,18 +227,18 @@ more details
 
 <div class="mb-3">
     <label  class="form-label">user name</label>
-    <input type="text" class="form-control"  aria-describedby="" Name="name">
+    <input type="text" class="form-control Name= "username"/ value= "<?=	 $userdata['User_name'];?>">
     <div id="" class="form-text">We'll never share your user name with anyone else.</div>
   </div>
 <div class="mb-3">
     <label  class="form-label">Email address</label>
-    <input type="email" class="form-control" id="Email1" name="email">
+    <input type="email" class="form-control" name="email" value="<?=	 $userdata['user_email'];?>">
     <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
   </div><br>
  
   <div class="mb-3">
     <label  class="form-label">NID</label>
-    <input type="text" class="form-control" Name="nid">
+    <input type="text" class="form-control" Name="nid" />
   </div><br>
 
   <div class="mb-3">
@@ -253,10 +261,10 @@ more details
 				<div class="col-lg-3">
 					<label class="form-label" style="font-weight:500;"> Adult</label>
 					<select class="form-select form-control shawon-none"  name="member">
-         <option selected>Open this select menu</option>
-          <option value="one">One</option>
-          <option value="two">Two</option>
-        <option value="three">Three</option>
+         <option selected value= "">Open this select menu</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+        <option value="3">Three</option>
        </select>
 				</div>
 <br>

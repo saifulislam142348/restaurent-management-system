@@ -38,7 +38,8 @@ if(!$name==""){
 	if(!$password=="")
 	{
 	if(strlen($password)>6)	
-	{$query=mysqli_query($conn,"SELECT * FROM `users` WHERE `email`='$email'");
+	{
+		$query=mysqli_query($conn,"SELECT * FROM `users` WHERE `email`='$email'");
 if(mysqli_num_rows($query)==0){
 		$result=mysqli_query($conn,"INSERT INTO `users`(`name`, `email`, `password`) VALUES('$name','$email','$password')");
 		if($result){

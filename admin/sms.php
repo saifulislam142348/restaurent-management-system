@@ -13,22 +13,18 @@
         <th>User Name</th>
         <th>Email</th>
         
-		<th>Nid</th>
-		<th>Phone number</th>
-      
 		
-        <th> check in</th>
-        <th> check out</th>
-        <th> total member</th>
-        <th> room number</th>
+		
 		<th>Date_time</th>
 		<th>Action</th>
       </tr>
     </thead>
     <tbody>
 	<?php
-	$result=mysqli_query($conn,"SELECT * FROM `room_confirm`  ");
+	$result=mysqli_query($conn,"SELECT * FROM `room_confirm` where roomname between 500 and 1200 ");
 	while($row=mysqli_fetch_assoc($result)){
+  
+
 		
 		?>
       <tr>
@@ -44,6 +40,7 @@
         <td><?php echo $row['member']; ?></td>
         <td><?php echo $row['roomname']; ?></td>
        
+           
         <td><?php echo date('d-M-Y',strtotime($row['time'])) ; ?></td>
 		<td>
 		<a class=" btn btn-success" href="">Edit</a> 
@@ -51,7 +48,7 @@
 		</td>
 		
       </tr>
-		s
+		
 		<?php
 	}
 	
