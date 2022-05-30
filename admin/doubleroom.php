@@ -8,7 +8,7 @@
 	
 	
 		
-		<tr>
+		<tr class="text-center">
 	     <th>ID</th>
         <th>User Name</th>
         <th>Email</th>
@@ -20,9 +20,10 @@
         <th> check in</th>
         <th> check out</th>
         <th> total member</th>
-        <th> room number</th>
+        <th> room price</th>
 		<th>Date_time</th>
 		<th>Action</th>
+    <th>status</th>
       </tr>
     </thead>
     <tbody>
@@ -50,8 +51,12 @@
 		<td>
 		<a class=" btn btn-success" href="">Edit</a> 
      <a class="btn btn-danger" href="delete.php?=id<?php echo  $row['id']; ?>">Delete</a>
+    
 		</td>
-		
+		<td>
+
+    <a class=" btn btn-success" href="#">active/deactive</a> 
+    </td>
       </tr>
 		s
 		<?php

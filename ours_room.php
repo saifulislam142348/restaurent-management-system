@@ -18,9 +18,9 @@ $adult=$_POST['member'];
 
  $room =$_POST['room'];
 
- echo $name;
+ 
  foreach($room as $price){
-if($checkin<$checkout){
+
 
   $query=mysqli_query($conn,"SELECT * FROM `room_cofirm` WHERE `email`='$email'");
   if(mysqli_num_rows($query)==0){
@@ -32,6 +32,7 @@ if($checkin<$checkout){
 header('location:profile.php');
 
   }
+}
      
  
 else{
@@ -42,8 +43,8 @@ else{
 }
 
   }
-}
- }
+
+ 
 
 ?>
 <?php
@@ -55,12 +56,44 @@ $user = $_SESSION['id'];
 
 
 ?>
+<?php
 
+require_once 'config.php';
+
+if(isset($_POST['submit'])){
+	
+
+
+	$email=$_POST['email'];
+	$nid=$_POST['nid'];
+
+$nid_check=mysqli_query($conn,"SELECT * FROM `room_confirm` WHERE `email`=	$email && `nid`=	$nid ");
+if(mysqli_num_rows($nid_check)>0){
+	
+	$row=mysqli_fetch_assoc($nid_check);
+	
+	if($row['email']==$email);
+	{
+		$_SESSION['id'] = $row['id'];
+		
+		header('location:profile.php');
+		echo 'successfully';
+	}
+}
+	
+	else{
+		$wrong_email='Wrong Email & Password ,please Enter the Regiter Email & password';
+		
+	}
+
+}
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>home page</title>
+  <title>our room booking procssing </title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -70,12 +103,13 @@ $user = $_SESSION['id'];
 <body>
 
 
-   <marquee behavior="scroll" direction="left"><b>Very nice and pleasant environment
-The Restaurant is open 24 hours a day</b> </marquee>
+  
+
+<div class="jumbotron">
 <div class="container">
   <div class="row">
 
-  <div class="col-lg-6">
+  <div class="col-lg-4">
   <?php
 	$username = mysqli_query($conn,"SELECT * FROM `user_registation` WHERE `id` = '$user'");
 	
@@ -86,12 +120,50 @@ The Restaurant is open 24 hours a day</b> </marquee>
 	?>
   </div>
 
-  <div class="col-lg-6">
+  <div class="col-lg-">
   <?php include_once('search_bar.php'); ?>
+  </div>
+  <div class="col-lg-4">
+  <li><a   href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
   </div>
   </div>
   
 </div>
+<div class="dropdown"><a class="dropdown-toggle list-group-item" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"> <p>If you have to book a room in advance. </p><h3><b class="btn btn-success">Click here </b> </h3> </span></a>
+        <ul class="dropdown-menu">
+          <li><a class="nav-link" href="#"><span class="glyphicon glyphicon-user"> 
+            	<div class="jumbotron">
+              <h2 class=" badge text-wrap"> login in</h2><br>
+              <form action="#" method="POST">
+  <div class="mb-3 mt-3">
+    <label for="email" class="form-label">Email:</label>
+    <input type="email" class="form-control"  placeholder="Enter email" name="email">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">NID:</label>
+    <input type="text" class="form-control" placeholder="Enter  you  nid " name="nid">
+  </div>
+  
+  </div>
+  <button type="submit" class="btn btn-primary"  name = "submit">Submit</button>
+</form>
+
+
+</div></span></a></li>
+          
+		  </li>
+          
+        </ul>
+      </div>
+      <marquee behavior="scroll" direction="left"><b>Very nice and pleasant environment
+The Restaurant is open 24 hours a day</b> </marquee>
+</div>
+
+
+
+
+
+
 <br>
 <br>
 
@@ -166,7 +238,7 @@ more details
 </div>
     
    <div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" name="room" value= "2000"  data-bs-toggle="dropdown" aria-expanded="false">
+  <button class="btn btn-primary dropdown-toggle" type="button" name="room[]" value= "2000"  data-bs-toggle="dropdown" aria-expanded="false">
 more details
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -227,7 +299,7 @@ more details
 
 <div class="mb-3">
     <label  class="form-label">user name</label>
-    <input type="text" class="form-control Name= "username"/ value= "<?=	 $userdata['User_name'];?>">
+    <input type="text" class="form-control Name = "username" value= "<?=	 $userdata['User_name'];?>">
     <div id="" class="form-text">We'll never share your user name with anyone else.</div>
   </div>
 <div class="mb-3">
@@ -283,8 +355,7 @@ more details
     
       <?php include_once('footer.php'); ?>
 
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+      
 </body>
 </html>
     

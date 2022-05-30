@@ -1,6 +1,7 @@
 
 
 <?php 
+
 	require_once 'config.php';
 if(isset($_POST['submit'])){
 	
@@ -104,7 +105,7 @@ if(mysqli_num_rows($email_check)>0){
 
 ?>
 
-<?php include_once('clintfunction.php'); ?>
+
 <?php include_once('config.php');?>
 <!DOCTYPE html>
 <html lang="en">

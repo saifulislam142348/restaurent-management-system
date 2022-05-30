@@ -1,4 +1,12 @@
+<?php
 
+
+ require_once 'config.php';
+ 
+$user = $_SESSION['id'];
+
+
+?>
 
 
 <div class="container">
@@ -27,6 +35,8 @@
 		<th>checkout</th>
    
     <th>Action</th>
+	<th>status</th>
+	<th>Your totol payment money</th>
       </tr>
     </thead>
     <tbody>
@@ -40,9 +50,12 @@
         <td><?php echo $row['checkout']; ?></td>
         <td><a class="btn btn-danger">delete</a>
         <edit class="btn btn-success">edit</a>
+		
+
       
       </td>
-		
+		<th><a class="btn btn-primary">pending</a></th>
+		<th><a class="">1200</a></th>
 		
       </tr>
 		
@@ -124,15 +137,55 @@
 				<div class="list-group">
 					<a href="#" class="list-group-item "> <i class="glyphicon glyphicon-dashboard"></i> Dashboard 
 					</a>
-					<a href="" class="list-group-item active "><i class="glyphicon glyphicon-user"></i> Customer Details
+				
+					<a href="ours_room.php" class="list-group-item  "><i class="glyphicon glyphicon-user"></i>  add New room booking 
 					</a>
-					
-					
 
-					<a href="#" class="list-group-item"><i class="glyphicon glyphicon-off"></i> Logout
+					<a href="logout.php" class="list-group-item"><i class="glyphicon glyphicon-off"></i> Logout
 					</a>
 				</div>
-				
+				<?php
+	$username = mysqli_query($conn,"SELECT * FROM `user_registation` WHERE `id` = '$user'");
+	
+	$userdata = mysqli_fetch_assoc($username);
+	echo $userdata['user_email'];
+	
+	
+	?>
+				<div class="dropdown"><a class="dropdown-toggle list-group-item" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"> (Profile)</span></a>
+        <ul class="dropdown-menu">
+          <li><a class="nav-link" href="room.php"><span class="glyphicon glyphicon-user"> 	<div class="jumbotron">
+
+<table class="table table-striped">
+<h3 class=" badge text-wrap"> profile</h3>
+<tr><th>Id:</th>
+<td class="text-success bolder"><?php echo  $userdata['user_email']; ?></td>
+</tr>
+<tr><th>Name:</th>
+<td class="text-success bolder">saiful</td>
+</tr>
+<tr><th>Gmail:</th>
+<td class="text-success bolder">saiful@gmail.com</td>
+</tr>
+<tr><th>Nid :</th>
+<td class="text-success bolder">12345</td>
+</tr>
+<tr><th>Phone:</th>
+<td class="text-success bolder">01773....</td>
+</tr>
+
+
+
+
+</table>
+
+
+</div></span></a></li>
+          
+		  </li>
+          
+        </ul>
+      </div>
 			</div>
 			<div class="col-sm-9">
 				<div class="content">
@@ -160,7 +213,7 @@
 		<th>room  checkin </th>
 		<th>room  checkout </th>
     <th>room Cost </th>
-    <th>room number</th>
+    <th>room member</th>
     <th>time</th>
       </tr>
     </thead>
@@ -176,8 +229,8 @@
 		
         <td><?php echo $row['id']; ?></td>
         <td><?php echo $row['name']; ?></td>
-        <td><?php echo $row['checkin']; ?></td>
-        <td><?php echo $row['checkout']; ?></td>
+		<td><?php echo date('d-M-Y',strtotime($row['checkin'])) ; ?></td>
+        <td><?php echo date('d-M-Y',strtotime($row['checkout'])) ; ?></td>
         <td><?php echo $row['roomname']; ?></td>
         <td><?php echo $row['member']; ?></td>
         

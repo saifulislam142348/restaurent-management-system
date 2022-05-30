@@ -1,48 +1,32 @@
 
- <?php include_once('../heder.php'); ?>
-  <?php include_once('config.php'); ?>
-  <?php
-  if (isset($_POST['submit'])) {
-
-    $room_name=$_POST['room_name'];
-    $room_price=$_POST['room_price'];
-    $room_catagory=$_POST['room_select'];
-    $room_discription=$_POST['comment'];
-   $target="room_images/".basename($_FILES['filename']['name']);
-
-    $sql= mysqli_query($conn,"INSERT INTO `room_add`(`room_name`, `room_price`, `room_catagory`, `discription`, `photo`) VALUES ('$room_name', '$room_price', '$room_catagory', '$room_discription','$target')");
-   
-  }
-move_uploaded_file(['filename']['name'], $target )
-
-
-  ?>
-
- <body>
-  <form action="" method="post" enctype="multipart/form-data">
-  <div class="container">
-  <br>
-  <div>
+ <?php include_once('config.php'); ?>
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <title> admin home page</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div>
   <a class="nav-link" href="admin_index.php"><span class=" btn-lg btn-success" > back</span></a>
 </div>
+
+<form action="" method="post" enctype="multipart/form-data">
+  <div class="container">
+  <br>
+  
 <br>
 <div class="mb-3">
 
   <label  class="form-label bg-primary">Room name</label>
-<select id="inputState" class="form-control" name="room_name" value=""/>
-                                        <option selected>room...</option>
-                                        <option>A1</option>
-                                      <option >A2</option>
-                                      <option>A3</option>
-                                      <option >A4</option>
-                                      <option >A5</option>
-                                     <option>B1</option>
-                                      <option >B2</option>
-                                      <option>B3</option>
-                                      <option >B4</option>
-                                      <option >B5</option>
-                              
-                               </select>
+<input type="text"class="form-control" name="room_name" value="">
+                                        
+                                        
+                            
 
 <div class="mb-3">
 
@@ -52,15 +36,7 @@ move_uploaded_file(['filename']['name'], $target )
 <br>
 <div class="mb-3">
 
-  <label class="form-label bg-primary">Room catagory </label>
- 
-              <div class="">  
-<select id="inputState" class="form-control" name="room_select" value=""/>
-                                        <option selected>room select.</option>
-                                        <option>single</option>
-                                      <option >double </option>
-                              
-                               </select>
+  
 </div>
 <br>
 <div class="mb-3">
