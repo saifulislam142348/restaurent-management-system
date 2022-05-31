@@ -51,7 +51,7 @@
         <td><?php echo date('d-M-Y',strtotime($row['time'])) ; ?></td>
 		<td>
 		<a class=" btn btn-success" href="">Edit</a> 
-     <a class="btn btn-danger" href="delete.php?=id<?php echo  $row['id']; ?>">Delete</a>
+     <a class="btn btn-danger" href="delete.php?id=<?php echo  $row['id']; ?>">Delete</a>
      
 		</td>
 		<td>

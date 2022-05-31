@@ -1,5 +1,13 @@
+<?php
 
- <?php include_once('config.php'); ?>
+
+ require_once 'config.php';
+ 
+$user = $_SESSION['id'];
+
+
+?>
+
  <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -81,13 +89,17 @@
 
 					<div class="dropdown"><a class="dropdown-toggle list-group-item" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user">Admin profile</span></a>
         <ul class="dropdown-menu">
-          <li><a class="nav-link" href="room.php"><span class="glyphicon glyphicon-user"> 
+          <li><a class="nav-link" href="room.php">
+			  <span class="glyphicon glyphicon-user"> 
+				  
 			  	
 		  <?php include_once('admin_profile.php'); ?>
 
-		</span></a></li>
+		</span>
+	</</a>
+</li>
           
-		  </li>
+		 
           
         </ul>
       </div>
@@ -146,3 +158,7 @@
 				</div>
 				
 			</div> 
+		</div>
+	</div>
+</body>
+</html>

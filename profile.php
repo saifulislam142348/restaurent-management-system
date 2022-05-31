@@ -33,7 +33,7 @@ $user = $_SESSION['id'];
 		<th>Phone number</th>
 		<th>checkin</th>
 		<th>checkout</th>
-   
+		<th>member</th>
     <th>Action</th>
 	<th>status</th>
 	<th>Your totol payment money</th>
@@ -48,8 +48,9 @@ $user = $_SESSION['id'];
         <td><?php echo $row['phone']; ?></td>
         <td><?php echo $row['checkin']; ?></td>
         <td><?php echo $row['checkout']; ?></td>
-        <td><a class="btn btn-danger">delete</a>
-        <edit class="btn btn-success">edit</a>
+		<td><?php echo $row['member']; ?></td>
+        <td><a href="delete.php?id=<?php echo  $row['id']; ?>" class="btn btn-danger">delete</a>
+        <a href="costomer_edit.php?id=<?php echo  $row['id']; ?>"  class="btn btn-success">edit</a>
 		
 
       
@@ -148,33 +149,50 @@ $user = $_SESSION['id'];
 	$username = mysqli_query($conn,"SELECT * FROM `user_registation` WHERE `id` = '$user'");
 	
 	$userdata = mysqli_fetch_assoc($username);
-	echo $userdata['user_email'];
+	
+
 	
 	
 	?>
-				<div class="dropdown"><a class="dropdown-toggle list-group-item" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"> (Profile)</span></a>
+	
+				<div class="dropdown"><a class="dropdown-toggle list-group-item" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"> (Profile) <?php echo  $userdata['user_email']; ?></span></a>
         <ul class="dropdown-menu">
           <li><a class="nav-link" href="room.php"><span class="glyphicon glyphicon-user"> 	<div class="jumbotron">
-
+		
 <table class="table table-striped">
 <h3 class=" badge text-wrap"> profile</h3>
 <tr><th>Id:</th>
-<td class="text-success bolder"><?php echo  $userdata['user_email']; ?></td>
+<td class="text-success bolder"><?php echo  $userdata['id']; ?></td>
 </tr>
 <tr><th>Name:</th>
-<td class="text-success bolder">saiful</td>
+<td class="text-success bolder"><?php echo  $userdata['User_name']; ?></td>
 </tr>
 <tr><th>Gmail:</th>
-<td class="text-success bolder">saiful@gmail.com</td>
+<td class="text-success bolder"><?php echo  $userdata['user_email']; ?></td>
 </tr>
+<?php
+	$result=mysqli_query($conn,"SELECT * FROM user_registation inner join room_confirm on user_registation.user_email= room_confirm.email ");
+	if (mysqli_num_rows($result)>0){
+		$row =mysqli_fetch_assoc($result);
+		
+		?>
 <tr><th>Nid :</th>
-<td class="text-success bolder">12345</td>
+<td class="text-success ">
+<td><?php echo $row['nid']; ?></td>
+</td>
 </tr>
 <tr><th>Phone:</th>
-<td class="text-success bolder">01773....</td>
+<td class="text-success ">
+<td><?php echo $row['phone']; ?></td>
+</td>
 </tr>
 
-
+	
+<?php
+	}
+	
+	
+	?>
 
 
 </table>

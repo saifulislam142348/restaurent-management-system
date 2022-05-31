@@ -1,37 +1,48 @@
 <div class="jumbotron">
 
 <table class="table table-striped">
-<h3 class=" badge text-wrap">Costomer sms <p>1</p> </h3>
+<h3 class=" badge text-wrap">Total costomer details<p class="bi bi-cast">1</p> </h3>
 <tr>
     <th>Id</th>
     <th>Name</th>
     <th>Email</th>
-    <th>Comments</th>
-    <th>status</th>
+    <th>comment</th>
+    <th>time</th>
+    <th>action</th>
 
 
 
 
 
 </tr>
+<?php
+$costomer=mysqli_query($conn,"SELECT * FROM `user_comment`");
+while($row=mysqli_fetch_assoc($costomer)) {
+    # code...
+
+
+?>
 <tr>
-    <td>1</td>
-    <td>saiful</td>
-    <td>saiful@gmail.com</td>
-    <td>hi....</td>
-    
+    <td><?php echo $row['id']; ?></td>
+    <td><?php echo $row['user_cmt_name']; ?></td>
+    <td><?php echo $row['User_cmt_email']; ?></td>
+    <td><?php echo $row['user_cmt']; ?></td>
+    <td><?php echo $row['cmt_time']; ?></td>
     <td>
-        <a  href="#" class="btn btn-primary"> Replay</a>
-        <a  href="#" class="btn btn-danger"> Delete</a>
+        <a class="btn btn-danger">delete</a>
+        <a class="btn btn-success">Replay</a>
 
-
-    </td> 
+</td>
+   
+    
    
 
 
 </tr>
 
-
+<?php
+}
+?>
 
 
 </table>

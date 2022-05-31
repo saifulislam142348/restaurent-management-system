@@ -16,13 +16,20 @@
 
 
 </tr>
+<?php
+$costomer=mysqli_query($conn,"SELECT * FROM `user_registation` inner join room_confirm on user_registation.user_email= room_confirm.email");
+while($row=mysqli_fetch_assoc($costomer)) {
+    # code...
+
+
+?>
 <tr>
-    <td>1</td>
-    <td>saiful</td>
-    <td>saiful@gmail.com</td>
-    <td>12345</td>
-    <td>076..</td>
-    <td>016233...</td>
+    <td><?php echo $row['id']; ?></td>
+    <td><?php echo $row['name']; ?></td>
+    <td><?php echo $row['email']; ?></td>
+    <td><?php echo $row['User_password']; ?></td>
+    <td><?php echo $row['nid']; ?></td>
+    <td><?php echo $row['phone']; ?></td>
     <td>
         <a class="btn btn-danger">delete</a>
         <a class="btn btn-success">Edit</a>
@@ -35,7 +42,9 @@
 
 </tr>
 
-
+<?php
+}
+?>
 
 
 </table>

@@ -48,10 +48,31 @@
         <td><?php echo date('d-M-Y',strtotime($row['time'])) ; ?></td>
 		<td>
 		<a class=" btn btn-success" href="">Edit</a> 
-     <a class="btn btn-danger" href="delete.php?=id<?php echo  $row['id']; ?>">Delete</a>
+     <a class="btn btn-danger" href="delete.php?id=<?php echo  $row['id']; ?>">Delete</a>
     
 		</td>
-		<td><a class=" btn btn-success" href="#">active/deactive</a> </td>
+		<td>
+      <td >
+     
+      </td>
+    </td>
+      <?php
+      if($row['status']==1){
+   
+        echo "<p>active</p>";
+      }
+      else{
+
+        echo "<p>dective</p>";
+      }
+
+      
+      
+      ?>
+  </td>
+      
+
+ 
       </tr>
 		
 		<?php

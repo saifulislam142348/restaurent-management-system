@@ -1,6 +1,15 @@
 
+<?php
 
-<?php require_once 'config.php';?>
+
+require_once 'config.php';
+
+$user = $_SESSION['id'];
+
+
+?>
+
+
 
 <?php
 
@@ -49,47 +58,34 @@ else{
 ?>
 <?php
 
-
- require_once 'config.php';
- 
-$user = $_SESSION['id'];
-
-
-?>
-<?php
-
 require_once 'config.php';
 
 if(isset($_POST['submit'])){
 	
 
+$email=$_POST['email'];
+$nid=$_POST['nid'];
 
-	$email=$_POST['email'];
-	$nid=$_POST['nid'];
-
-$nid_check=mysqli_query($conn,"SELECT * FROM `room_confirm` WHERE `email`=	$email && `nid`=	$nid ");
-if(mysqli_num_rows($nid_check)>0){
+$email_check=mysqli_query($conn,"SELECT * FROM `room_confirm` WHERE `email`='$email'");
+if(mysqli_num_rows($email_check)>0){
 	
-	$row=mysqli_fetch_assoc($nid_check);
 	
-	if($row['email']==$email);
+	$row=mysqli_fetch_assoc($email_check);
+	
+	if($row['nid']==$nid)
 	{
-		$_SESSION['id'] = $row['id'];
-		
-		header('location:profile.php');
-		echo 'successfully';
+		header('location: profile.php');
 	}
 }
 	
 	else{
-		$wrong_email='Wrong Email & Password ,please Enter the Regiter Email & password';
+		$wrong_email='Wrong Email & nid  ,please Enter the correct Email & nid';
 		
 	}
 
 }
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -134,6 +130,9 @@ if(mysqli_num_rows($nid_check)>0){
           <li><a class="nav-link" href="#"><span class="glyphicon glyphicon-user"> 
             	<div class="jumbotron">
               <h2 class=" badge text-wrap"> login in</h2><br>
+<div class="btn btn-primary"><?php  echo 	$wrong_email;?></div>
+
+
               <form action="#" method="POST">
   <div class="mb-3 mt-3">
     <label for="email" class="form-label">Email:</label>
@@ -145,8 +144,9 @@ if(mysqli_num_rows($nid_check)>0){
   </div>
   
   </div>
-  <button type="submit" class="btn btn-primary"  name = "submit">Submit</button>
+  <button type="submit" class="btn btn-primary"  name ="submit">Submit</button>
 </form>
+
 
 
 </div></span></a></li>
@@ -197,7 +197,7 @@ The Restaurant is open 24 hours a day</b> </marquee>
 </div>
   </li>
   <li class="list-group-item">
-    <input class="form-check-input me-1" type="checkbox" value="1200" name="room[]" aria-label="...">
+    <input class="form-check-input me-1" type="checkbox" value="1200" name="room[]" >
     <div class="card" style="width:auto;">
   <img class="card-img-top " src="bedroom/room (6).jpg" alt="Card image" width="40%" height="50%">
   <div class="card-body">
@@ -227,7 +227,7 @@ more details
     <h4 class="card-title">double  room_3</h4>
     <p>price:1500</p>
     <div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" name="room"  data-bs-toggle="dropdown" value= "1600" aria-expanded="false">
+  <button class="btn btn-primary dropdown-toggle" type="button" name="room[]"  data-bs-toggle="dropdown" value= "1600" aria-expanded="false">
   more details
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -271,14 +271,14 @@ more details
 </div>
   </li>
   <li class="list-group-item">
-    <input class="form-check-input me-1" type="checkbox" value="1200" name="room[]" aria-label="...">
+    <input class="form-check-input me-1" type="checkbox" value="1200" name="room[]" >
     <div class="card" style="width:auto;">
   <img class="card-img-top " src="bedroom/room (6).jpg" alt="Card image" width="40%" height="50%">
   <div class="card-body">
     <h4 class="card-title">double  room_2</h4>
     <p>price:1200</p>
     <div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button"  data-bs-toggle="dropdown" aria-expanded="false">
+  <button class="btn btn-primary dropdown-toggle" type="button"  data-bs-toggle="dropdown" >
     more datails
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -299,12 +299,12 @@ more details
 
 <div class="mb-3">
     <label  class="form-label">user name</label>
-    <input type="text" class="form-control Name = "username" value= "<?=	 $userdata['User_name'];?>">
+    <input type="text" class="form-control Name = "username" value="<?php echo $userdata['User_name'];?>">
     <div id="" class="form-text">We'll never share your user name with anyone else.</div>
   </div>
 <div class="mb-3">
     <label  class="form-label">Email address</label>
-    <input type="email" class="form-control" name="email" value="<?=	 $userdata['user_email'];?>">
+    <input type="email" class="form-control" name="email" value="<?=$userdata['user_email'];?>">
     <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
   </div><br>
  
